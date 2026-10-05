@@ -1,0 +1,1555 @@
+/* 
+================================================================================
+  BẢNG MÃ CSS PORTFOLIO CÁ NHÂN - PHẠM GIA HƯNG
+  Chuyên đề: HTML5 Semantic & Modern CSS UI/UX Design
+  Chủ đề màu: Nền đen họa tiết xanh lá, chữ thông tin trắng, số liệu & tương tác xanh lá.
+================================================================================
+*/
+
+/* 
+================================================================================
+  1. CSS VARIABLES (HỆ THỐNG BIẾN TOÀN CỤC)
+  - Vai trò: Khởi tạo bảng màu chuẩn, phông chữ và kích cỡ dùng chung cho toàn bộ dự án.
+  - Ý nghĩa: Đảm bảo tính nhất quán (UI Consistency), dễ bảo trì và dễ tùy biến giao diện.
+================================================================================
+*/
+:root {
+  /* Bảng màu nền & Họa tiết (Dark Black & Light Green Accent) */
+  --bg-black: #080c0a;                     /* Màu nền đen chủ đạo toàn trang */
+  --bg-card: rgba(16, 24, 20, 0.85);        /* Nền thẻ thông tin (Card) kính mờ tối màu */
+  --bg-card-hover: rgba(24, 38, 30, 0.95);  /* Nền thẻ khi di chuột vào */
+  --bg-input: #0f1612;                      /* Nền ô nhập liệu của biểu mẫu liên hệ */
+  
+  /* Bảng màu xanh lá (Green Accent, Glow & Patterns) */
+  --color-green: #00ff88;                   /* Xanh lá neon sáng cho số liệu & tương tác chuyển trang */
+  --color-green-hover: #10b981;             /* Xanh lá ngọc khi hover */
+  --color-green-subtle: #22c55e;            /* Xanh lá phụ trợ */
+  --pattern-green: rgba(0, 255, 136, 0.08); /* Chấm họa tiết xanh lá nhạt trên nền đen */
+  --border-green: rgba(0, 255, 136, 0.2);   /* Viền xanh lá mảnh tinh tế */
+  --border-green-glow: rgba(0, 255, 136, 0.6); /* Viền phát sáng khi focus */
+  --glow-green: rgba(0, 255, 136, 0.35);    /* Đổ bóng phát sáng neon xanh lá */
+  --glow-green-subtle: rgba(0, 255, 136, 0.12); /* Ánh hào quang nhẹ phía trên trang */
+
+  /* Bảng màu chữ (Typography Colors) */
+  --text-white: #ffffff;                    /* Màu trắng tinh khôi cho các dòng thông tin chính */
+  --text-muted: #d1d5db;                    /* Màu trắng xám cho thông tin bổ trợ/chú thích */
+  --text-dark: #080c0a;                     /* Màu chữ đen khi nằm trên nút bấm màu xanh lá */
+
+  /* Hệ thống Typography Font */
+  --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Quy chuẩn kích thước, bo góc & hiệu ứng */
+  --container-max-width: 1200px;
+  --header-height: 75px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 
+================================================================================
+  2. CSS RESET & CẤU HÌNH NỀN (RESET & BASE STYLING)
+  - Vai trò: Đồng bộ hiển thị giữa các trình duyệt, thiết lập box-sizing chuẩn.
+  - Nền: Màu đen với các họa tiết chấm ma trận và ánh sáng xanh lá cây nhạt.
+================================================================================
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-black);
+  /* Nền đen với họa tiết chấm lưới xanh lá nhạt + ánh sáng tỏa tròn radial-gradient */
+  background-image: 
+    radial-gradient(var(--pattern-green) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 50% 0%, var(--glow-green-subtle), transparent 50%);
+  background-size: 32px 32px, 100% 100%;
+  background-attachment: fixed;
+  color: var(--text-white);
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* 
+================================================================================
+  3. TYPOGRAPHY (ĐỊNH DẠNG CHỮ, THÔNG TIN & SỐ LIỆU)
+  - Chữ màu trắng: Áp dụng cho các dòng thông tin, tiêu đề, đoạn văn mô tả.
+  - Chữ màu xanh lá: Áp dụng cho các dòng chữ thể hiện số liệu hoặc tương tác.
+================================================================================
+*/
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-white);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: var(--text-white);
+  margin-bottom: 1rem;
+}
+
+/* 
+  Hiệu ứng ký tự đang được gõ (Typewriter Effect) trong vòng 6 giây:
+  - animation-duration: 6s (đúng 6 giây theo yêu cầu).
+  - steps(48, end): bước nhảy theo từng ký tự, tạo chuyển động cơ học mượt mà.
+  - border-right: con trỏ nhấp nháy màu xanh lá neon đặc trưng.
+*/
+.lead-text {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+  color: var(--text-white);
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid var(--color-green);
+  width: 0;
+  max-width: 100%;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.5px;
+  /* Kích hoạt hiệu ứng gõ chữ 6s và con trỏ nhấp nháy */
+  animation: 
+    typingEffect 6s steps(48, end) forwards,
+    blinkCaret 0.75s step-end infinite;
+}
+
+.about-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+/* Keyframe mở dần chiều rộng để từng ký tự xuất hiện trong 6 giây */
+@keyframes typingEffect {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 48ch;
+  }
+}
+
+/* Keyframe cho con trỏ nhấp nháy màu xanh lá */
+@keyframes blinkCaret {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-green);
+  }
+}
+
+.text-name {
+  color: var(--text-white);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Các dòng chữ thể hiện SỐ LIỆU (Metrics / Stats) - BẮT BUỘC MÀU XANH LÁ */
+.metric-number,
+.stat-number {
+  font-family: var(--font-mono);
+  color: var(--color-green);
+  font-weight: 700;
+  display: inline-block;
+  text-shadow: 0 0 12px var(--glow-green);
+}
+
+/* 
+================================================================================
+  4. LAYOUT HEADER & NAV (ĐIỀU HƯỚNG BẰNG FLEXBOX)
+  - Vai trò: Header ghim đỉnh (sticky), chứa Logo và khối Nav điều hướng chính.
+  - Bố cục: Flexbox căn 2 đầu (space-between), hiệu ứng kính mờ (Backdrop Filter).
+  - Tương tác: Các liên kết chuyển mục hiển thị màu xanh lá cây đặc trưng.
+================================================================================
+*/
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  background-color: rgba(8, 12, 10, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  transition: border-color var(--transition-normal);
+}
+
+/* Logo cá nhân */
+.logo-link {
+  color: var(--text-white);
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform var(--transition-fast);
+}
+
+.logo-link:hover {
+  transform: translateY(-1px);
+}
+
+.logo-link strong {
+  color: var(--text-white);
+}
+
+.brand-accent {
+  color: var(--color-green);
+  text-shadow: 0 0 10px var(--color-green);
+}
+
+/* Checkbox ẩn điều khiển trạng thái mở / đóng menu */
+.nav-toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Nút bấm chứa 3 vạch ngang (Hamburger Button) */
+.nav-toggle-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1002;
+  padding: 1px 0;
+  transition: transform var(--transition-fast);
+}
+
+.nav-toggle-btn:hover {
+  transform: scale(1.08);
+}
+
+.nav-toggle-btn:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* 3 vạch ngang của biểu tượng */
+.hamburger-bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-green);
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--glow-green);
+  transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+              opacity 0.25s ease,
+              background-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+  transform-origin: center;
+}
+
+/* ==============================================================================
+   HIỆU ỨNG CHUYỂN ĐỔI: 3 DẤU GẠCH NGANG BIẾN THÀNH DẤU "X"
+   Khi người dùng click vào nút, checkbox nhận trạng thái :checked
+   - Vạch trên: dịch xuống 9.5px và xoay 45 độ
+   - Vạch giữa: mờ đục = 0 và co tỉ lệ chiều ngang = 0
+   - Vạch dưới: dịch lên 9.5px và xoay -45 độ
+   ============================================================================== */
+.nav-toggle-checkbox:checked + .nav-toggle-btn .bar-top {
+  transform: translateY(9.5px) rotate(45deg);
+}
+
+.nav-toggle-checkbox:checked + .nav-toggle-btn .bar-middle {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle-checkbox:checked + .nav-toggle-btn .bar-bottom {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+.nav-toggle-checkbox:checked + .nav-toggle-btn .hamburger-bar {
+  background-color: #00ffaa;
+  box-shadow: 0 0 12px var(--color-green);
+}
+
+/* Khối <nav> gom nhóm 4 liên kết điều hướng đặt bên trong menu */
+nav.main-nav {
+  position: absolute;
+  top: calc(var(--header-height) + 10px);
+  right: 2rem;
+  min-width: 250px;
+  background: rgba(10, 16, 13, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px var(--glow-green-subtle);
+  padding: 1.25rem 0.85rem;
+  
+  /* Ban đầu ẩn hoàn toàn */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.3s;
+  z-index: 1001;
+}
+
+/* Khi ấn vô biểu tượng 3 dấu gạch ngang -> Hiển thị menu chứa 4 từ */
+.nav-toggle-checkbox:checked ~ nav.main-nav {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Danh sách 4 liên kết xếp gọn trong menu */
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list li {
+  width: 100%;
+}
+
+/* Từng liên kết điều hướng chuyển trang - MÀU XANH LÁ */
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.15rem;
+  color: var(--color-green);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.98rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  transition: background-color var(--transition-fast), 
+              color var(--transition-fast), 
+              transform var(--transition-fast), 
+              text-shadow var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '→';
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  color: var(--color-green);
+}
+
+.nav-link:hover {
+  background: rgba(0, 255, 136, 0.12);
+  color: var(--text-white);
+  transform: translateX(4px);
+  text-shadow: 0 0 10px var(--color-green);
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 
+================================================================================
+  4.1 PARALLAX BANNER (BANNER HIỆU ỨNG THỊ SAI SCROLLING)
+  - Kỹ thuật cốt lõi: Sử dụng thuộc tính `background-attachment: fixed`
+  - Cơ chế hoạt động: Khi người dùng cuộn trang, ảnh nền được giữ cố định theo khung nhìn
+    (viewport), trong khi các nội dung chữ, nút bấm và badge chuyển động tự nhiên theo 
+    dòng cuộn. Sự đối lập này tạo nên hiệu ứng ảnh nền trôi chậm hơn nhiều hoặc đứng yên 
+    so với nội dung, mang lại chiều sâu thị giác (Parallax effect) bắt mắt.
+================================================================================
+*/
+.parallax-banner {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--header-height) + 3rem) 1.5rem 4rem;
+  /* Lớp phủ gradient đa tầng kết hợp cùng ảnh nền lập trình công nghệ cao */
+  background-image: 
+    linear-gradient(180deg, rgba(8, 12, 10, 0.72) 0%, rgba(8, 12, 10, 0.88) 75%, var(--bg-black) 100%),
+    radial-gradient(circle at 50% 40%, rgba(0, 255, 136, 0.12) 0%, transparent 65%),
+    url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1920&q=80');
+  
+  /* THUỘC TÍNH CỐT LÕI TẠO NÊN HIỆU ỨNG PARALLAX SCROLLING */
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  border-bottom: 1px solid var(--border-green);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.parallax-content {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.parallax-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.25rem;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid var(--border-green);
+  border-radius: 50px;
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.parallax-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.parallax-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--color-green);
+  font-weight: 600;
+  text-shadow: 0 0 12px var(--color-green);
+}
+
+.parallax-desc {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  max-width: 680px;
+  line-height: 1.7;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.parallax-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Nút chỉ dẫn cuộn xuống (Scroll Down Indicator) */
+.scroll-down-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  color: var(--color-green);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--transition-normal);
+}
+
+.scroll-down-btn:hover {
+  transform: translateY(4px);
+}
+
+.mouse-icon {
+  width: 24px;
+  height: 38px;
+  border: 2px solid var(--color-green);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  box-shadow: 0 0 12px var(--glow-green);
+}
+
+.mouse-wheel {
+  width: 4px;
+  height: 8px;
+  background-color: var(--color-green);
+  border-radius: 2px;
+  animation: mouseWheelAnim 1.8s infinite ease-in-out;
+}
+
+.scroll-arrow {
+  font-size: 1.25rem;
+  color: var(--color-green);
+  animation: bounceDown 2s infinite ease-in-out;
+  text-shadow: 0 0 10px var(--color-green);
+}
+
+@keyframes mouseWheelAnim {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes bounceDown {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(8px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+}
+
+/* 
+================================================================================
+  5. LAYOUT MAIN & SECTIONS (KHỐI NỘI DUNG CHÍNH)
+  - Vai trò: Bao bọc các section chính (Giới thiệu, Kỹ năng, Dự án, Liên hệ).
+  - Bố cục: Căn giữa theo trục ngang, Flexbox hướng cột với khoảng cách hợp lý.
+================================================================================
+*/
+main.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+/* Khối Section chung */
+.section {
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.section-subtitle {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px var(--glow-green);
+}
+
+/* Section 1: Giới thiệu (About Me) & Thống kê số liệu */
+.about-section .lead-text,
+.about-section .about-desc {
+  max-width: 850px;
+}
+
+/* Bố cục thẻ số liệu bằng CSS Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  backdrop-filter: blur(8px);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-green);
+  box-shadow: 0 8px 24px var(--glow-green);
+}
+
+.stat-card .metric-number {
+  font-size: 2.2rem;
+}
+
+.stat-card .metric-label {
+  color: var(--text-white);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* 
+================================================================================
+  6. CARDS & GRID SYSTEM (HỆ THỐNG LƯỚI CHO KỸ NĂNG & DỰ ÁN)
+  - Vai trò: Bố cục lưới linh hoạt cho các thẻ kỹ năng và dự án nổi bật.
+  - Kỹ thuật: Sử dụng CSS Grid tự động co giãn (repeat(auto-fit, minmax(...))).
+================================================================================
+*/
+/* Lưới Kỹ Năng (Skills Grid) */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-green);
+  box-shadow: 0 10px 30px var(--glow-green);
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-green);
+  padding-bottom: 0.75rem;
+}
+
+.skill-header h3 {
+  color: var(--text-white);
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-green);
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--border-green);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+}
+
+.skill-card p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Từng khối kỹ năng chứa tên, số % và thanh tiến trình */
+.skill-progress-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.skill-name {
+  color: var(--text-white);
+  font-weight: 500;
+}
+
+/* Số phần trăm màu xanh lá neon - chạy từ 0% đến mốc yêu cầu */
+.skill-number {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-green);
+  text-shadow: 0 0 8px var(--glow-green);
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Rãnh chứa thanh tiến trình */
+.skill-track {
+  width: 100%;
+  height: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Thanh chạy kỹ năng: từ 0% -> giá trị đích trong 2.5s, chậm dần khi về cuối */
+.skill-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00bb66 0%, var(--color-green) 100%);
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 12px var(--color-green);
+  /* Chạy trong đúng 2.5 giây, cubic-bezier làm thanh chạy chậm dần khi đến gần cuối */
+  transition: width 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Điểm phát sáng chạy ở đầu thanh tiến trình */
+.skill-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 14px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 8px #ffffff, 0 0 16px var(--color-green);
+  opacity: 0.85;
+}
+
+/* Lưới Dự Án (Projects Grid) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(8px);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  background: var(--bg-card-hover);
+  border-color: var(--color-green);
+  box-shadow: 0 12px 32px var(--glow-green);
+}
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.project-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-green);
+  background: rgba(0, 255, 136, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-green);
+}
+
+.project-card h3 {
+  margin-bottom: 0.75rem;
+}
+
+.tech-stack {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(0, 255, 136, 0.15);
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* 
+================================================================================
+  7. INTERACTIVE BUTTONS & LINKS (QUY CHUẨN NÚT VÀ LIÊN KẾT TƯƠNG TÁC)
+  - Nút tương tác quan trọng: BẮT BUỘC CÓ PADDING MÀU XANH LÁ để nổi bật.
+  - Nút/Liên kết không quan trọng: BẮT BUỘC KHÔNG CÓ PADDING (padding: 0).
+  - Các liên kết tương tác chuyển trang: Màu xanh lá cây.
+================================================================================
+*/
+/* Nút tương tác QUAN TRỌNG (Có padding màu xanh lá làm nổi bật) */
+.btn-important,
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-green);
+  color: var(--text-dark);
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.95rem;
+  /* Quy chuẩn: PADDING MÀU XANH LÁ ĐỂ NỔI BẬT */
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-green);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 16px var(--glow-green);
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-important:hover,
+button[type="submit"]:hover {
+  background-color: var(--color-green-hover);
+  border-color: var(--color-green-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(0, 255, 136, 0.6);
+}
+
+.btn-important:active,
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* Nút tương tác & Liên kết KHÔNG QUAN TRỌNG (KHÔNG CÓ PADDING) */
+.link-unimportant,
+button[type="reset"] {
+  /* Quy chuẩn: KHÔNG CÓ PADDING */
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--color-green);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color var(--transition-fast), text-shadow var(--transition-fast);
+}
+
+.link-unimportant:hover,
+button[type="reset"]:hover {
+  color: var(--text-white);
+  text-shadow: 0 0 8px var(--color-green);
+}
+
+/* Các liên kết tương tác chuyển trang chung - Màu xanh lá cây */
+.interactive-link,
+a {
+  color: var(--color-green);
+  transition: color var(--transition-fast);
+}
+
+.interactive-link:hover,
+a:hover {
+  color: var(--text-white);
+  text-shadow: 0 0 8px var(--color-green);
+}
+
+/* 
+================================================================================
+  8. FORM LIÊN HỆ (LAYOUT FORM & Ô NHẬP LIỆU)
+  - Vai trò: Định dạng biểu mẫu tương tác và thông tin kênh liên hệ.
+  - Bố cục: Grid 2 cột trên máy tính, chuyển sang 1 cột trên di động.
+================================================================================
+*/
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  backdrop-filter: blur(10px);
+}
+
+/* 
+================================================================================
+  8.1. THẺ NHÂN SỰ LẬT 3D (3D FLIP PROFILE CARD WITH ANIMATION)
+  - Hiệu ứng: Khi hover/chạm, thẻ xoay 180 độ theo trục Y trong không gian 3D.
+  - Mặt trước: Avatar, Email, Khu vực sinh sống, Tốc độ phản hồi.
+  - Mặt sau: Thông tin chi tiết năng lực, kỹ năng, các kênh kết nối.
+================================================================================
+*/
+.profile-card-container {
+  perspective: 1200px;
+  width: 100%;
+  min-height: 480px;
+  cursor: pointer;
+  outline: none;
+}
+
+.profile-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  text-align: left;
+  transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+  border-radius: var(--radius-lg);
+}
+
+/* Kích hoạt xoay 180 độ khi hover, focus-within hoặc active trên mobile */
+.profile-card-container:hover .profile-card-inner,
+.profile-card-container:focus-within .profile-card-inner,
+.profile-card-container:active .profile-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Thuộc tính chung cho 2 mặt thẻ */
+.profile-card-front,
+.profile-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-green);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.profile-card-container:hover .profile-card-front,
+.profile-card-container:hover .profile-card-back {
+  border-color: var(--color-green);
+  box-shadow: 0 12px 35px var(--glow-green);
+}
+
+/* --- MẶT TRƯỚC (FRONT FACE) --- */
+.profile-card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.avatar-container {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin-bottom: 1.25rem;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-green);
+  background-color: #0d1410;
+  box-shadow: 0 0 16px var(--glow-green);
+}
+
+.active-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-green);
+  border: 2px solid var(--bg-black);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-green);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.card-name {
+  font-size: 1.5rem;
+  color: var(--text-white);
+  margin-bottom: 0.25rem;
+}
+
+.card-role {
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.front-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-key {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.detail-text {
+  color: var(--text-white);
+  font-size: 0.95rem;
+}
+
+.card-hint {
+  font-size: 0.82rem;
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(0, 255, 136, 0.2);
+}
+
+.hint-icon {
+  font-size: 1rem;
+  animation: spinSlow 4s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- MẶT SAU (BACK FACE) --- */
+.profile-card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, rgba(16, 26, 20, 0.95), rgba(8, 14, 10, 0.98));
+}
+
+.back-title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.back-title {
+  font-size: 1.25rem;
+  color: var(--text-white);
+}
+
+.available-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-green);
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid var(--border-green);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.back-bio {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.back-specs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
+}
+
+.back-specs li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: var(--text-white);
+}
+
+.back-specs strong {
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.card-hint-back {
+  font-size: 0.82rem;
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(0, 255, 136, 0.2);
+}
+
+/* Form nhập liệu */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: var(--text-white);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  color: var(--text-white);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--color-green);
+  box-shadow: 0 0 12px var(--glow-green);
+}
+
+.form-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-top: 0.5rem;
+}
+
+/* 
+================================================================================
+  8.2. NÚT LIÊN HỆ TRÒN NỔI GÓC PHẢI (FLOATING PULSE CONTACT BUTTON)
+  - Vị trí: Cố định góc dưới cùng bên phải màn hình (fixed bottom: 20px, right: 20px).
+  - Hiệu ứng: Pulse animation (sóng xung kích phập phồng liên tục) tạo sự chú ý mạnh mẽ.
+  - Tương tác: Bấm vào sẽ cuộn trang nhanh về form liên hệ.
+================================================================================
+*/
+.floating-contact-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  color: var(--bg-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 0 20px var(--glow-green), 0 6px 16px rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--color-green);
+  cursor: pointer;
+  /* Hiệu ứng phập phồng nhịp tim (pulse) */
+  animation: pulseButton 2.2s infinite ease-in-out;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.floating-contact-btn:hover {
+  transform: scale(1.14) rotate(-8deg);
+  background-color: var(--color-green-hover);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.85);
+}
+
+.floating-contact-btn:active {
+  transform: scale(0.92);
+}
+
+.floating-contact-btn .btn-icon {
+  position: relative;
+  z-index: 2;
+  color: var(--bg-black);
+  stroke: var(--bg-black);
+}
+
+/* Các vòng sóng xung kích lan tỏa (Pulse Wave Rings) */
+.pulse-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--color-green);
+  opacity: 0.8;
+  animation: pulseWaveRipple 2.2s infinite cubic-bezier(0.24, 0, 0.38, 1);
+  pointer-events: none;
+}
+
+.pulse-wave-delayed {
+  animation-delay: 1.1s;
+}
+
+@keyframes pulseButton {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 16px var(--glow-green);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 28px rgba(0, 255, 136, 0.7);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 16px var(--glow-green);
+  }
+}
+
+@keyframes pulseWaveRipple {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(1.68);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.72);
+    opacity: 0;
+  }
+}
+
+/* 
+================================================================================
+  9. LAYOUT FOOTER (CHÂN TRANG DÙNG FLEXBOX)
+  - Vai trò: Hiển thị bản quyền tác giả và danh sách mạng xã hội phụ trợ.
+  - Bố cục: Nằm dưới cùng, Flexbox căn đều 2 bên mép (space-between).
+================================================================================
+*/
+footer.site-footer {
+  width: 100%;
+  border-top: 1px solid var(--border-green);
+  background-color: rgba(8, 12, 10, 0.95);
+  padding: 2.5rem 2rem;
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.copyright {
+  color: var(--text-white);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.social-list {
+  display: flex;
+  list-style: none;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+/* Liên kết mạng xã hội (tương tác chuyển trang -> Màu xanh lá) */
+.social-link {
+  color: var(--color-green);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color var(--transition-fast), text-shadow var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.social-link:hover {
+  color: var(--text-white);
+  text-shadow: 0 0 10px var(--color-green);
+  transform: translateY(-2px);
+}
+
+/* 
+================================================================================
+  10. RESPONSIVE DESIGN (TỐI ƯU GIAO DIỆN DI ĐỘNG & MỌI KHUNG HÌNH)
+  - Ưu tiên: Tối ưu hàng đầu cho bản điện thoại, nội dung xếp vừa vặn mọi kích thước.
+  - Yêu cầu đặc biệt: Vị trí cách sát viền màn hình điện thoại là 20 pixel (thay vì 15px).
+================================================================================
+*/
+@media (max-width: 868px) {
+  /* Header trên tablet & mobile - thanh ngang gọn gàng, cách mép 20px */
+  header.site-header {
+    height: var(--header-height);
+    padding: 0 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Khối menu dropdown 4 liên kết mở rộng sát 2 mép màn hình 20px */
+  nav.main-nav {
+    right: 20px;
+    left: 20px;
+    min-width: auto;
+    top: calc(var(--header-height) + 8px);
+  }
+
+  /* Parallax Banner trên tablet & mobile - căn lề chuẩn 20px */
+  .parallax-banner {
+    min-height: 60vh;
+    padding: calc(var(--header-height) + 1.5rem) 20px 3rem;
+  }
+
+  .parallax-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+    gap: 1rem;
+  }
+
+  .parallax-actions .btn-important {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Khối nội dung chính - khoảng cách sát mép màn hình chính xác 20px */
+  main.main-content {
+    padding: 2.5rem 20px 5rem;
+    gap: 4.5rem;
+    max-width: 100%;
+  }
+
+  /* Layout liên hệ chuyển sang 1 cột xếp chồng vừa khít màn hình */
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 1.75rem 20px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Thẻ nhân sự lật 3D trên mobile */
+  .profile-card-container,
+  .profile-card-inner {
+    min-height: 500px;
+  }
+
+  .profile-card-front,
+  .profile-card-back {
+    padding: 1.75rem 20px;
+  }
+
+  /* Footer trên mobile - cách mép chuẩn 20px */
+  footer.site-footer {
+    padding: 2.5rem 20px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 15px;
+  }
+
+  /* Header trên điện thoại nhỏ */
+  header.site-header {
+    padding: 1rem 20px;
+  }
+
+  /* Parallax Banner trên mobile nhỏ */
+  .parallax-banner {
+    min-height: 55vh;
+    padding: calc(var(--header-height) + 1rem) 20px 2.5rem;
+  }
+
+  .logo-link {
+    font-size: 1.15rem;
+  }
+
+  .nav-list {
+    gap: 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  /* Thống kê xếp 1 cột vừa khít */
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem 20px;
+  }
+
+  /* Nút hành động co giãn tràn chiều ngang thân thiện ngón tay */
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .btn-important,
+  button[type="submit"] {
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1.5rem;
+  }
+
+  /* Thẻ kỹ năng & thẻ dự án hiển thị gọn gàng */
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .skill-card,
+  .project-card {
+    padding: 1.5rem 20px;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .card-actions .btn-important {
+    width: 100%;
+  }
+
+  /* Form liên hệ nút bấm */
+  .form-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  /* Nút liên hệ nổi ở góc dưới bên phải - cách mép chuẩn 20px */
+  .floating-contact-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 54px;
+    height: 54px;
+  }
+
+  /* Tối ưu hiệu ứng gõ chữ vừa vặn không tràn trên màn hình điện thoại nhỏ */
+  .lead-text {
+    font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+    letter-spacing: 0;
+  }
+  
+  /* Đảm bảo chữ dài không bao giờ làm tràn màn hình điện thoại */
+  p, h2, h3, a, span {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}

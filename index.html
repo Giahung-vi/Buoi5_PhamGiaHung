@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Cá Nhân - Phạm Gia Hưng</title>
+    <!-- File định dạng CSS giao diện -->
+    <link rel="stylesheet" href="index.css">
+    <!-- Google Fonts hỗ trợ hiển thị Typography hiện đại -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 
+      ==========================================================================
+      SEMANTIC BLOCK: <header>
+      - Vai trò & Ý nghĩa: Thẻ <header> đại diện cho phần đầu của trang web hoặc 
+        của một phân đoạn tài liệu. Khối này chứa các thông tin giới thiệu mở đầu,
+        yếu tố nhận diện thương hiệu (như logo, tên tác giả) và các công cụ điều 
+        hướng chính. Giúp các công cụ tìm kiếm (SEO) và thiết bị hỗ trợ tiếp cận 
+        (Screen Readers) dễ dàng xác định được phần mở màn của toàn bộ trang web.
+      ==========================================================================
+    -->
+    <header class="site-header">
+        <!-- Logo / Thương hiệu cá nhân -->
+        <div class="logo">
+            <a href="#about" class="logo-link"><strong>Gia Hưng</strong><span class="brand-accent">.</span>dev</a>
+        </div>
+
+        <!-- 
+          ======================================================================
+          HAMBURGER TOGGLE (NÚT 3 DẤU GẠCH NGANG BIẾN THÀNH DẤU "X")
+          - Kỹ thuật: Checkbox Hack (HTML5 & CSS3)
+          - Cơ chế hoạt động: Khi người dùng nhấp vào nút 3 gạch (label), checkbox 
+            được kích hoạt trạng thái :checked, kích hoạt hiệu ứng hoạt hình biến đổi
+            3 vạch thành dấu "X" đồng thời mở rộng menu chứa 4 liên kết điều hướng.
+          ======================================================================
+        -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-label="Mở đóng menu điều hướng">
+        <label for="nav-toggle" class="nav-toggle-btn" aria-label="Menu điều hướng" title="Mở hoặc Đóng Menu">
+            <span class="hamburger-bar bar-top"></span>
+            <span class="hamburger-bar bar-middle"></span>
+            <span class="hamburger-bar bar-bottom"></span>
+        </label>
+
+        <!-- 
+          ======================================================================
+          SEMANTIC BLOCK: <nav>
+          - Vai trò & Ý nghĩa: Thẻ <nav> đóng vai trò gom nhóm các liên kết điều hướng 
+            chính (navigation links). Thẻ này cho phép người dùng và các trình đọc 
+            màn hình nhanh chóng truy cập hoặc bỏ qua để đi thẳng đến những phân vùng 
+            nội dung quan trọng trên website thông qua các liên kết neo (anchor links).
+          ======================================================================
+        -->
+        <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+            <ul class="nav-list">
+                <li><a href="#about" class="nav-link">Giới thiệu</a></li>
+                <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
+                <li><a href="#projects" class="nav-link">Dự án</a></li>
+                <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 
+      ==========================================================================
+      PARALLAX HERO BANNER (BANNER HIỆU ỨNG PARALLAX SCROLLING)
+      - Vai trò & Ý nghĩa: Banner chào mừng toàn trang với hiệu ứng ảnh nền thị sai
+        (Parallax) di chuyển chậm hơn nội dung khi cuộn thông qua thuộc tính CSS
+        `background-attachment: fixed`. Ảnh nền được giữ cố định so với viewport,
+        tạo cảm giác chiều sâu không gian 3D hiện đại khi người dùng lướt trang.
+      ==========================================================================
+    -->
+    <section class="parallax-banner" aria-label="Banner chào mừng Portfolio">
+        <div class="parallax-content">
+            <span class="parallax-badge">⚡ Modern Front-end &amp; UI/UX</span>
+            <h1 class="parallax-title">Kiến Tạo Trải Nghiệm Số Đỉnh Cao</h1>
+            <p class="parallax-subtitle">Phạm Gia Hưng &bull; Creative Developer</p>
+            <p class="parallax-desc">
+                Chuyên sâu phát triển giao diện web responsive, chuẩn hóa Semantic HTML5, tối ưu tốc độ tải trang và mang đến hiệu ứng thị giác ấn tượng trên mọi thiết bị.
+            </p>
+            <div class="parallax-actions">
+                <a href="#about" class="btn-important">Khám Phá Hồ Sơ</a>
+                <a href="#projects" class="link-unimportant">Xem Dự Án Tiêu Biểu &rarr;</a>
+            </div>
+            <a href="#about" class="scroll-down-btn" aria-label="Cuộn xuống nội dung giới thiệu">
+                <span class="mouse-icon">
+                    <span class="mouse-wheel"></span>
+                </span>
+                <span class="scroll-arrow">↓</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 
+      ==========================================================================
+      SEMANTIC BLOCK: <main>
+      - Vai trò & Ý nghĩa: Thẻ <main> bao bọc vùng nội dung cốt lõi, trung tâm và 
+        độc nhất của tài liệu web. Mỗi trang chỉ được phép có DUY NHẤT một thẻ 
+        <main> hiển thị (không ẩn). Thẻ này không được chứa các nội dung lặp lại 
+        xuyên suốt website như thanh menu điều hướng chung, banner header hay footer.
+      ==========================================================================
+    -->
+    <main class="main-content">
+
+        <!-- 
+          ======================================================================
+          SEMANTIC BLOCK: <section> (Section 1: About Me)
+          - Vai trò & Ý nghĩa: Thẻ <section> đại diện cho một phân đoạn nội dung độc lập, 
+            có tính gắn kết theo một chủ đề cụ thể. Theo chuẩn ngữ nghĩa, mỗi <section> 
+            cần có một tiêu đề (heading từ <h2> đến <h6>) để định hình cấu trúc phân cấp, 
+            giúp người đọc và bot tìm kiếm nắm bắt được nội dung tóm lược của phần đó.
+          ======================================================================
+        -->
+        <section id="about" class="section about-section">
+            <div class="section-header">
+                <span class="section-subtitle">01. Khám phá</span>
+                <h2>Giới Thiệu Bản Thân</h2>
+            </div>
+            
+            <p class="lead-text">
+                Xin chào! Tôi là <strong class="text-name">Phạm Gia Hưng</strong> - Front-end Dev.
+            </p>
+            <p class="about-desc">
+                Tôi là một lập trình viên đam mê phát triển các giao diện người dùng hiện đại, trực quan và tối ưu trải nghiệm (UX/UI). 
+                Luôn chú trọng ứng dụng chuẩn HTML5 Semantic và tuân thủ các nguyên tắc khả năng tiếp cận (Accessibility - a11y) 
+                nhằm mang đến những sản phẩm web thân thiện, chuẩn SEO và dễ bảo trì.
+            </p>
+            <p>
+                <strong>Mục tiêu nghề nghiệp:</strong> Không ngừng làm chủ các công nghệ mới trong hệ sinh thái JavaScript/TypeScript, 
+                chuyên sâu kiến trúc phát triển ứng dụng web hiện đại và hướng tới vị trí Senior Full-stack Engineer trong tương lai.
+            </p>
+
+            <!-- Số liệu nổi bật (Data / Metrics thể hiện bằng màu xanh lá cây) -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="metric-number">02+</span>
+                    <span class="metric-label">Năm Kinh Nghiệm</span>
+                </div>
+                <div class="stat-card">
+                    <span class="metric-number">15+</span>
+                    <span class="metric-label">Dự Án Hoàn Thành</span>
+                </div>
+                <div class="stat-card">
+                    <span class="metric-number">100%</span>
+                    <span class="metric-label">Cam Kết Đúng Tiến Độ</span>
+                </div>
+            </div>
+
+            <!-- Nút tương tác chính (Quan trọng có padding xanh, không quan trọng không có padding) -->
+            <div class="hero-actions">
+                <a href="#projects" class="btn-important">Xem Các Dự Án</a>
+                <a href="#contact" class="link-unimportant">Gửi Lời Nhắn Nhanh &rarr;</a>
+            </div>
+        </section>
+
+        <!-- 
+          ======================================================================
+          SEMANTIC BLOCK: <section> (Kỹ năng - Skills)
+          - Vai trò & Ý nghĩa: Phân đoạn trình bày các kỹ năng chuyên môn, công nghệ 
+            sử dụng và mức độ thuần thục của lập trình viên.
+          ======================================================================
+        -->
+        <section id="skills" class="section skills-section">
+            <div class="section-header">
+                <span class="section-subtitle">02. Năng lực</span>
+                <h2>Kỹ Năng Chuyên Môn</h2>
+            </div>
+
+            <div class="skills-grid">
+                <!-- Thẻ Kỹ năng 1: HTML5 & Tiêu chuẩn Web -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <h3>HTML5 &amp; Semantic</h3>
+                        <span class="skill-tag">Web Standards</span>
+                    </div>
+                    <p>Thành thạo cấu trúc thẻ Semantic HTML5 chuẩn SEO, tối ưu khả năng tiếp cận (A11y) và trải nghiệm duyệt web.</p>
+                    
+                    <div class="skill-progress-block">
+                        <div class="skill-progress-label">
+                            <span class="skill-name">HTML5 / Semantic</span>
+                            <span class="metric-number skill-number" data-target="90">0%</span>
+                        </div>
+                        <div class="skill-track">
+                            <div class="skill-fill" data-progress="90"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-progress-block">
+                        <div class="skill-progress-label">
+                            <span class="skill-name">Web Accessibility (A11y)</span>
+                            <span class="metric-number skill-number" data-target="88">0%</span>
+                        </div>
+                        <div class="skill-track">
+                            <div class="skill-fill" data-progress="88"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thẻ Kỹ năng 2: CSS3 & Giao diện Responsive -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <h3>CSS3 &amp; Responsive UI</h3>
+                        <span class="skill-tag">UI/UX Styling</span>
+                    </div>
+                    <p>Làm chủ Flexbox, CSS Grid, hệ thống biến CSS Variables, hiệu ứng hoạt họa và tối ưu hiển thị trên mọi dòng điện thoại.</p>
+                    
+                    <div class="skill-progress-block">
+                        <div class="skill-progress-label">
+                            <span class="skill-name">CSS3 / Responsive</span>
+                            <span class="metric-number skill-number" data-target="85">0%</span>
+                        </div>
+                        <div class="skill-track">
+                            <div class="skill-fill" data-progress="85"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-progress-block">
+                        <div class="skill-progress-label">
+                            <span class="skill-name">Animations &amp; Parallax</span>
+                            <span class="metric-number skill-number" data-target="86">0%</span>
+                        </div>
+                        <div class="skill-track">
+                            <div class="skill-fill" data-progress="86"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thẻ Kỹ năng 3: JavaScript & Công cụ -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <h3>JavaScript &amp; Tooling</h3>
+                        <span class="skill-tag">Logic &amp; Build</span>
+                    </div>
+                    <p>Lập trình hướng chức năng ES6+, bất đồng bộ, thao tác DOM hiệu năng cao, quản lý mã nguồn Git và bundler hiện đại.</p>
+                    
+                    <div class="skill-progress-block">
+                        <div class="skill-progress-label">
+                            <span class="skill-name">JavaScript (ES6+) / TypeScript</span>
+                            <span class="metric-number skill-number" data-target="88">0%</span>
+                        </div>
+                        <div class="skill-track">
+                            <div class="skill-fill" data-progress="88"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-progress-block">
+                        <div class="skill-progress-label">
+                            <span class="skill-name">Git &amp; Development Tools</span>
+                            <span class="metric-number skill-number" data-target="85">0%</span>
+                        </div>
+                        <div class="skill-track">
+                            <div class="skill-fill" data-progress="85"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          ======================================================================
+          SEMANTIC BLOCK: <section> (Section 2: Projects)
+          - Vai trò & Ý nghĩa: Thẻ <section> ở khu vực này có nhiệm vụ phân nhóm 
+            các nội dung liên quan đến danh mục dự án cá nhân nổi bật. Để tăng tính 
+            ngữ nghĩa, mỗi dự án bên trong được bọc trong thẻ <article> - biểu thị một 
+            thực thể nội dung độc lập, tự mang ý nghĩa và có thể tái sử dụng riêng biệt.
+          ======================================================================
+        -->
+        <section id="projects" class="section projects-section">
+            <div class="section-header">
+                <span class="section-subtitle">03. Sản phẩm</span>
+                <h2>Dự Án Nổi Bật</h2>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Dự án 1 -->
+                <article class="project-card">
+                    <div class="project-top">
+                        <span class="project-tag">Dự Án #01</span>
+                        <span class="metric-number">★ 4.9/5.0</span>
+                    </div>
+                    <h3>TaskFlow - Quản Lý Công Việc</h3>
+                    <p>
+                        Ứng dụng web quản lý tiến độ công việc theo mô hình bảng Kanban kéo thả, 
+                        hỗ trợ phân loại trạng thái, lưu trữ dữ liệu cục bộ và nhắc nhở thời hạn.
+                    </p>
+                    <p class="tech-stack">
+                        <strong>Công nghệ:</strong> HTML5 Drag & Drop, CSS Grid, JavaScript (ES6+), LocalStorage.
+                    </p>
+                    <div class="card-actions">
+                        <a href="https://taskflow.example.com" class="btn-important" target="_blank" rel="noopener noreferrer">Trải nghiệm Demo</a>
+                        <a href="https://github.com/example/taskflow" class="link-unimportant" target="_blank" rel="noopener noreferrer">Mã nguồn GitHub</a>
+                    </div>
+                </article>
+
+                <!-- Dự án 2 -->
+                <article class="project-card">
+                    <div class="project-top">
+                        <span class="project-tag">Dự Án #02</span>
+                        <span class="metric-number">★ 5.0/5.0</span>
+                    </div>
+                    <h3>ShopSmart - Website Thương Mại</h3>
+                    <p>
+                        Giao diện thương mại điện tử responsive, cung cấp trải nghiệm tìm kiếm, 
+                        lọc sản phẩm theo danh mục/giá, giỏ hàng tương tác và mô phỏng luồng thanh toán.
+                    </p>
+                    <p class="tech-stack">
+                        <strong>Công nghệ:</strong> React.js, Tailwind CSS, RESTful API, Context API.
+                    </p>
+                    <div class="card-actions">
+                        <a href="https://shopsmart.example.com" class="btn-important" target="_blank" rel="noopener noreferrer">Trải nghiệm Demo</a>
+                        <a href="https://github.com/example/shopsmart" class="link-unimportant" target="_blank" rel="noopener noreferrer">Mã nguồn GitHub</a>
+                    </div>
+                </article>
+
+                <!-- Dự án 3 -->
+                <article class="project-card">
+                    <div class="project-top">
+                        <span class="project-tag">Dự Án #03</span>
+                        <span class="metric-number">★ 4.8/5.0</span>
+                    </div>
+                    <h3>SkyCast - Dự Báo Thời Tiết</h3>
+                    <p>
+                        Ứng dụng định vị vị trí hiện tại của người dùng để hiển thị các chỉ số 
+                        thời tiết tức thì kèm biểu đồ dự báo xu hướng nhiệt độ và mưa trong 7 ngày tới.
+                    </p>
+                    <p class="tech-stack">
+                        <strong>Công nghệ:</strong> HTML5 Geolocation API, OpenWeatherMap API, Chart.js.
+                    </p>
+                    <div class="card-actions">
+                        <a href="https://skycast.example.com" class="btn-important" target="_blank" rel="noopener noreferrer">Trải nghiệm Demo</a>
+                        <a href="https://github.com/example/skycast" class="link-unimportant" target="_blank" rel="noopener noreferrer">Mã nguồn GitHub</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 
+          ======================================================================
+          SEMANTIC BLOCK: <section> (Section 3: Contact)
+          - Vai trò & Ý nghĩa: Thẻ <section> này đại diện cho phân đoạn kết nối và tương tác. 
+            Nó chứa các thông tin liên hệ tĩnh kết hợp cùng biểu mẫu tương tác (<form>). 
+            Việc sử dụng các thẻ nhập liệu chuẩn ngữ nghĩa (<label>, <input>, <textarea>, <button>) 
+            đảm bảo tính hợp lệ của dữ liệu đầu vào và trải nghiệm tốt nhất trên mọi thiết bị.
+          ======================================================================
+        -->
+        <section id="contact" class="section contact-section">
+            <div class="section-header">
+                <span class="section-subtitle">04. Kết nối</span>
+                <h2>Thông Tin & Biểu Mẫu Liên Hệ</h2>
+            </div>
+
+            <div class="contact-layout">
+                <!-- Thẻ nhân sự lật 3D (Interactive 3D Flip Profile Card) -->
+                <div class="profile-card-container" tabindex="0" role="region" aria-label="Thẻ nhân sự của Phạm Gia Hưng">
+                    <div class="profile-card-inner">
+                        <!-- MẶT TRƯỚC (FRONT FACE): Avatar trên đầu, bên dưới là email, khu vực sinh sống, tốc độ phản hồi -->
+                        <div class="profile-card-front">
+                            <div class="avatar-container">
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=PhamGiaHung&amp;backgroundColor=080c0a" alt="Avatar Phạm Gia Hưng" class="profile-avatar">
+                                <span class="active-badge" title="Đang online / Sẵn sàng hợp tác"></span>
+                            </div>
+                            
+                            <h3 class="card-name">Phạm Gia Hưng</h3>
+                            <p class="card-role">Front-end Developer</p>
+                            
+                            <div class="front-details">
+                                <div class="detail-row">
+                                    <span class="detail-key">Email:</span>
+                                    <a href="mailto:phamgiahung@example.com" class="interactive-link">phamgiahung@example.com</a>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-key">Khu vực sinh sống:</span>
+                                    <span class="detail-text">Hà Nội, Việt Nam</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-key">Tốc độ phản hồi:</span>
+                                    <span class="metric-number">&lt; 12 Giờ</span>
+                                </div>
+                            </div>
+
+                            <div class="card-hint">
+                                <span class="hint-icon">↻</span> Rê chuột hoặc chạm để xem chi tiết
+                            </div>
+                        </div>
+
+                        <!-- MẶT SAU (BACK FACE): Thông tin chi tiết hồ sơ năng lực -->
+                        <div class="profile-card-back">
+                            <div class="back-title-box">
+                                <h4 class="back-title">Hồ Sơ Năng Lực</h4>
+                                <span class="available-badge">Sẵn Sàng Nhận Job</span>
+                            </div>
+
+                            <p class="back-bio">
+                                Lập trình viên Front-end chuyên sâu kiến trúc UI/UX tối ưu di động, 
+                                chuẩn hóa Semantic HTML5, Responsive Design mọi kích cỡ màn hình.
+                            </p>
+
+                            <ul class="back-specs">
+                                <li>
+                                    <strong>Chuyên môn:</strong>
+                                    <span>React.js, Next.js, TypeScript, Tailwind CSS, CSS Grid/Flexbox</span>
+                                </li>
+                                <li>
+                                    <strong>GitHub:</strong>
+                                    <a href="https://github.com/phamgiahung" target="_blank" rel="noopener noreferrer" class="interactive-link">github.com/phamgiahung</a>
+                                </li>
+                                <li>
+                                    <strong>LinkedIn:</strong>
+                                    <a href="https://linkedin.com/in/phamgiahung" target="_blank" rel="noopener noreferrer" class="interactive-link">linkedin.com/in/phamgiahung</a>
+                                </li>
+                                <li>
+                                    <strong>Hình thức:</strong>
+                                    <span>Remote / On-site / Freelance</span>
+                                </li>
+                            </ul>
+
+                            <div class="card-hint-back">
+                                <span class="hint-icon">↺</span> Xoay lại mặt trước
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form liên hệ -->
+                <form action="#" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Họ và Tên:</label>
+                        <input type="text" id="name" name="name" required placeholder="Nhập họ và tên của bạn...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Địa chỉ Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="example@domain.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Lời nhắn:</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Nội dung bạn muốn trao đổi cùng tôi..."></textarea>
+                    </div>
+
+                    <div class="form-buttons">
+                        <!-- Nút gửi là tương tác quan trọng -> có padding màu xanh lá -->
+                        <button type="submit" class="btn-important">Gửi Lời Nhắn Ngay</button>
+                        <!-- Nút xoá là không quan trọng -> không có padding -->
+                        <button type="reset" class="link-unimportant">Xoá Lại Form</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 
+      ==========================================================================
+      SEMANTIC BLOCK: <footer>
+      - Vai trò & Ý nghĩa: Thẻ <footer> được đặt ở chân của tài liệu web (hoặc chân 
+        của một section). Thẻ này chứa các thông tin phụ trợ mang tính kết thúc 
+        như: thông tin bản quyền (Copyright), chính sách dịch vụ, thông tin sở hữu trí tuệ 
+        và các liên kết kết nối mạng xã hội phụ trợ cho trang web.
+      ==========================================================================
+    -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="copyright">&copy; 2026 Phạm Gia Hưng. Tất cả các quyền được bảo lưu.</p>
+
+            <!-- Liên kết mạng xã hội (tương tác chuyển trang -> màu xanh lá) -->
+            <ul class="social-list">
+                <li><a href="https://github.com/phamgiahung" target="_blank" rel="noopener noreferrer" class="social-link">GitHub</a></li>
+                <li><a href="https://linkedin.com/in/phamgiahung" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a></li>
+                <li><a href="https://facebook.com/phamgiahung" target="_blank" rel="noopener noreferrer" class="social-link">Facebook</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- 
+      ==========================================================================
+      FLOATING CONTACT BUTTON (NÚT LIÊN HỆ TRÒN NỔI GÓC PHẢI PHẬP PHỒNG)
+      - Vị trí: Cố định góc dưới cùng bên phải màn hình.
+      - Hiệu ứng: Pulse animation (sóng xung kích phập phồng) liên tục tạo điểm nhấn.
+      - Tương tác: Bấm vào sẽ cuộn mượt về khu vực <section id="contact">.
+      ==========================================================================
+    -->
+    <a href="#contact" class="floating-contact-btn" aria-label="Liên hệ nhanh" title="Liên hệ ngay với Phạm Gia Hưng">
+        <span class="pulse-wave"></span>
+        <span class="pulse-wave pulse-wave-delayed"></span>
+        <svg class="btn-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </a>
+
+    <!-- Kịch bản điều khiển giao diện & hiệu ứng động -->
+    <script>
+        // 1. Tự động đóng menu khi người dùng chọn một mục điều hướng
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navToggle = document.getElementById('nav-toggle');
+                if (navToggle) {
+                    navToggle.checked = false;
+                }
+            });
+        });
+
+        // ======================================================================
+        // 2. HIỆU ỨNG THANH KỸ NĂNG & ĐẾM SỐ PHẦN TRĂM KHI TRANG TẢI XONG
+        // - Thời gian chạy: đúng 2.5 giây (2500ms)
+        // - Gia tốc: Chậm dần khi đến gần đích (Cubic Ease-Out)
+        // - Đồng bộ: Thanh tiến trình và số đếm % chạm đích cùng một thời điểm
+        // ======================================================================
+        function startSkillsAnimation() {
+            const duration = 2500; // 2.5 giây theo yêu cầu
+            const startTime = performance.now();
+            const progressFills = document.querySelectorAll('.skill-fill');
+            const numberCounters = document.querySelectorAll('.skill-number');
+
+            // Kích hoạt thanh CSS width chạy từ 0% đến giá trị đích (HTML 90%, CSS 85%...)
+            progressFills.forEach(fill => {
+                const target = fill.getAttribute('data-progress') || '0';
+                fill.style.width = target + '%';
+            });
+
+            // Kích hoạt đếm số phần trăm tăng dần từ 0% đến mốc yêu cầu (chậm dần về cuối)
+            function updateCounters(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Hàm Cubic Ease-Out: 1 - Math.pow(1 - progress, 3) giúp số đếm chậm dần khớp nhịp với thanh CSS
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                numberCounters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target') || '0', 10);
+                    const currentVal = Math.round(target * easeOut);
+                    counter.textContent = currentVal + '%';
+                });
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounters);
+                } else {
+                    // Đảm bảo kết thúc đúng chính xác mốc yêu cầu
+                    numberCounters.forEach(counter => {
+                        const target = counter.getAttribute('data-target') || '0';
+                        counter.textContent = target + '%';
+                    });
+                }
+            }
+
+            requestAnimationFrame(updateCounters);
+        }
+
+        // Kích hoạt khi trang web tải xong
+        let hasSkillsAnimated = false;
+        function triggerSkillsAnimation() {
+            if (hasSkillsAnimated) return;
+            hasSkillsAnimated = true;
+            startSkillsAnimation();
+        }
+
+        window.addEventListener('load', () => {
+            const skillsSection = document.getElementById('skills');
+            
+            // Sử dụng IntersectionObserver để kích hoạt khi người dùng nhìn thấy phần kỹ năng
+            if ('IntersectionObserver' in window && skillsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            triggerSkillsAnimation();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                observer.observe(skillsSection);
+            } else {
+                // Fallback nếu không hỗ trợ IntersectionObserver
+                setTimeout(triggerSkillsAnimation, 300);
+            }
+        });
+
+        // Kích hoạt lại hiệu ứng mượt mà khi người dùng nhấp vào mục "Kỹ năng" ở menu
+        document.querySelectorAll('a[href="#skills"]').forEach(link => {
+            link.addEventListener('click', () => {
+                // Cho phép chạy hiệu ứng lại để người dùng xem lại bất cứ lúc nào
+                setTimeout(() => {
+                    const progressFills = document.querySelectorAll('.skill-fill');
+                    const numberCounters = document.querySelectorAll('.skill-number');
+                    progressFills.forEach(fill => fill.style.width = '0%');
+                    numberCounters.forEach(counter => counter.textContent = '0%');
+                    setTimeout(startSkillsAnimation, 100);
+                }, 350);
+            });
+        });
+    </script>
+</body>
+</html>
